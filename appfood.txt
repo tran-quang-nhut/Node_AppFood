@@ -12,7 +12,7 @@ create table restaurants(
 -- insert test data for restaurant 
 -- insert into restaurants(res_name, image, description)
 -- values ('Ba Gác', 'https://pasgo.vn/Upload/anh-diem-den/nha-hang-ba-gac---nuong-and-bia-le-quy-don-300-165040363042.jpg','Nướng và bia'),
--- ('Lão trư', 'https://pasgo.vn/Upload/anh-diem-den/quan-lao-tru---street-food-bbq-and-beer-song-hanh-300-124295533105.jpg', 'Street food BBQ & Beer'),
+-- ('Steak', 'https://pasgo.vn/Upload/anh-diem-den/quan-lao-tru---street-food-bbq-and-beer-song-hanh-300-124295533105.jpg', 'Street food BBQ & Beer'),
 -- ('Yaki', 'https://pasgo.vn/Upload/anh-diem-den/quan-nuong-yaki-che-lan-vien-tan-phu-300-12481811554.jpg', 'Quán nướng ở Chế Lan Viên'),
 -- ('Osaka Ramen', 'https://pasgo.vn/Upload/anh-diem-den/osaka-ramen-duong-so-17-300-12370481471.jpg', 'Quán ăn Nhật');
 
@@ -97,29 +97,29 @@ VALUES
 -- Insert test data for rate_res
 INSERT INTO rate_res (user_id, res_id, amount, date_rate) 
 VALUES 
-(1, 2, 5, '2022-04-01 10:00:00'),
-(2, 1, 4, '2022-04-02 14:00:00'),
-(3, 3, 3, '2022-04-03 12:00:00'),
-(4, 5, 5, '2022-04-04 11:00:00'),
-(5, 4, 4, '2022-04-05 13:00:00'),
-(1, 3, 5, '2022-04-06 10:00:00'),
-(2, 4, 4, '2022-04-07 14:00:00'),
-(3, 2, 3, '2022-04-08 12:00:00'),
-(4, 1, 5, '2022-04-09 11:00:00'),
-(5, 5, 4, '2022-04-10 13:00:00');
+(1, 2, 5, '2023-08-01 10:00:00'),
+(2, 1, 4, '2023-08-02 14:00:00'),
+(3, 3, 3, '2023-08-03 12:00:00'),
+(4, 5, 5, '2023-08-04 11:00:00'),
+(5, 4, 4, '2023-08-05 13:00:00'),
+(1, 3, 5, '2023-08-06 10:00:00'),
+(2, 4, 4, '2023-08-07 14:00:00'),
+(3, 2, 3, '2023-08-08 12:00:00'),
+(4, 1, 5, '2023-08-09 11:00:00'),
+(5, 5, 4, '2023-08-10 13:00:00');
 
 
 -- Insert test data for like_res
 INSERT INTO like_res (user_id, res_id, date_like)
 VALUES 
-(1, 1, '2023-04-01 09:00:00'),
-(2, 1, '2023-04-02 10:00:00'),
-(1, 2, '2023-04-02 11:00:00'),
-(2, 2, '2023-04-03 12:00:00'),
-(3, 2, '2023-04-03 13:00:00'),
-(1, 3, '2023-04-03 14:00:00'),
-(2, 3, '2023-04-03 15:00:00'),
-(3, 3, '2023-04-04 09:00:00');
+(1, 1, '2023-08-01 09:00:00'),
+(2, 1, '2023-08-02 10:00:00'),
+(1, 2, '2023-08-02 11:00:00'),
+(2, 2, '2023-08-03 12:00:00'),
+(3, 2, '2023-08-03 13:00:00'),
+(1, 3, '2023-08-03 14:00:00'),
+(2, 3, '2023-08-03 15:00:00'),
+(3, 3, '2023-08-04 09:00:00');
 -- Thêm dữ liệu vào bảng like_res
 insert into like_res(user_id, res_id, date_like)
 values (1, 1, now()), (2, 1, now()), (3, 1, now()), (4, 1, now()), (5, 1, now()),
@@ -141,8 +141,8 @@ values ('Món nướng'), ('Món Nhật'), ('Món ăn vặt');
 -- Thêm dữ liệu vào bảng foods
 insert into foods(food_name, image, price, description, type_id)
 values ('Thịt nướng', 'https://pasgo.vn/Upload/anh-diem-den/nha-hang-ba-gac---nuong-and-bia-le-quy-don-300-165040363042.jpg', 200000, 'Thịt heo nướng', 1),
-('Sushi', 'https://pasgo.vn/Upload/anh-diem-den/quan-nuong-yaki-che-lan-vien-tan-phu-300-12481811554.jpg', 150000, 'Cơm cuộn Nhật Bản', 2),
-('Bắp rang', 'https://pasgo.vn/Upload/anh-diem-den/quan-lao-tru---street-food-bbq-and-beer-song-hanh-300-124295533105.jpg', 50000, 'Bắp rang muối', 3);
+('Thit', 'https://pasgo.vn/Upload/anh-diem-den/quan-nuong-yaki-che-lan-vien-tan-phu-300-12481811554.jpg', 150000, 'Cơm cuộn Nhật Bản', 2),
+('bbq', 'https://pasgo.vn/Upload/anh-diem-den/quan-lao-tru---street-food-bbq-and-beer-song-hanh-300-124295533105.jpg', 50000, 'Bắp rang muối', 3);
 
 -- Thêm dữ liệu vào bảng sub_food
 insert into sub_food(sub_name, sub_price, food_id)
