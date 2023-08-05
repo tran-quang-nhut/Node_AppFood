@@ -1,0 +1,180 @@
+drop database if exists mysql_food;
+create database mysql_food;
+use mysql_food;
+-- Tạo bảng restaurant
+
+create table restaurants(
+	res_id int primary key auto_increment,
+    res_name varchar(250) not null,
+    image varchar(250) not null,
+    description varchar(250) not null
+);
+-- insert test data for restaurant 
+-- insert into restaurants(res_name, image, description)
+-- values ('Ba Gác', 'https://pasgo.vn/Upload/anh-diem-den/nha-hang-ba-gac---nuong-and-bia-le-quy-don-300-165040363042.jpg','Nướng và bia'),
+-- ('Lão trư', 'https://pasgo.vn/Upload/anh-diem-den/quan-lao-tru---street-food-bbq-and-beer-song-hanh-300-124295533105.jpg', 'Street food BBQ & Beer'),
+-- ('Yaki', 'https://pasgo.vn/Upload/anh-diem-den/quan-nuong-yaki-che-lan-vien-tan-phu-300-12481811554.jpg', 'Quán nướng ở Chế Lan Viên'),
+-- ('Osaka Ramen', 'https://pasgo.vn/Upload/anh-diem-den/osaka-ramen-duong-so-17-300-12370481471.jpg', 'Quán ăn Nhật');
+
+-- Tạo bảng user
+create table users(
+	user_id int primary key auto_increment,
+    full_name varchar(200) not null,
+    email varchar(250),
+    password varchar(30) not null
+);
+-- Insert test data for users
+-- insert into users(full_name, email, password)
+-- values ('Nguyen Le Duy Hoang', 'h10090413@gmail.com', 'Hoang123'),
+-- ('Truong Anh Ngoc', 'truonganhnguoc123@gmail.com', 'Hoang123'),
+-- ('Tinh Te Ifan', 'tinhteifan@gmail.com', 'Hoang123'); 
+-- Tạo bảng rate_res
+create table rate_res(
+	user_id int not null,
+    res_id int not null,
+    amount int not null,
+    date_rate datetime not null,
+    foreign key (user_id) references users(user_id),
+    foreign key (res_id) references restaurants(res_id)
+);
+create table like_res(
+	user_id int not null,
+    res_id int not null,
+    date_like datetime not null,
+    foreign key (user_id) references users(user_id),
+    foreign key (res_id) references restaurants(res_id)
+);
+-- Tạo bảng Order
+create table orders(
+	user_id int not null,
+    food_id int not null,
+    amount int not null,
+    code varchar(50) not null,
+    arr_sub_id varchar(250) not null
+);
+-- Tạo bảng food_type
+create table food_type(
+	type_id int primary key auto_increment,
+    type_name varchar(250) not null
+);
+-- Tạo bảng food 
+create table foods(
+	food_id int primary key auto_increment,
+    food_name varchar(250) not null,
+    image varchar(250) not null,
+    price float not null,
+    description varchar(250) not null,
+    type_id int not null,
+    foreign key (type_id) references food_type(type_id)
+);
+-- Tạo bảng subfood
+create table sub_food(
+	sub_id int primary key auto_increment,
+    sub_name varchar(250) not null,
+    sub_price float not null,
+    food_id int not null,
+     foreign key (food_id) references foods(food_id)
+);
+-- insert test data for restaurant 
+INSERT INTO restaurants (res_name, image, description) 
+VALUES 
+('Quán ốc Minh Nhật', 'https://www.foody.vn/ho-chi-minh/quan-oc-minh-nhat', 'Quán ốc ngon giá rẻ'),
+('Bánh mì Huỳnh Hoa', 'https://www.foody.vn/ho-chi-minh/banh-mi-huynh-hoa', 'Bánh mì thơm ngon'),
+('Quán cơm 32', 'https://www.foody.vn/ho-chi-minh/quan-com-32', 'Quán cơm trưa văn phòng'),
+('Nấm Lùn', 'https://www.foody.vn/ho-chi-minh/nam-lun', 'Quán ăn ngon ở Quận 3'),
+('Cơm tấm Sườn nướng 43', 'https://www.foody.vn/ho-chi-minh/com-tam-suon-nuong-43', 'Cơm tấm thịt nướng ngon');
+
+-- Insert test data for users
+INSERT INTO users (full_name, email, password) 
+VALUES 
+('Nguyễn Văn A', 'nguyenvana@gmail.com', '123456'),
+('Trần Quang B', 'tranquangb@gmail.com', '123456'),
+('Nguyễn Thị C', 'nguyenthic@gmail.com', '123456'),
+('Lê Thị D', 'lethid@gmail.com', '123456'),
+('Phạm Kim E', 'phamkime@gmail.com', '123456'),
+('Huỳnh văn F', 'huynhvanf@gmail.com', '1234562');
+
+-- Insert test data for rate_res
+INSERT INTO rate_res (user_id, res_id, amount, date_rate) 
+VALUES 
+(1, 2, 5, '2022-04-01 10:00:00'),
+(2, 1, 4, '2022-04-02 14:00:00'),
+(3, 3, 3, '2022-04-03 12:00:00'),
+(4, 5, 5, '2022-04-04 11:00:00'),
+(5, 4, 4, '2022-04-05 13:00:00'),
+(1, 3, 5, '2022-04-06 10:00:00'),
+(2, 4, 4, '2022-04-07 14:00:00'),
+(3, 2, 3, '2022-04-08 12:00:00'),
+(4, 1, 5, '2022-04-09 11:00:00'),
+(5, 5, 4, '2022-04-10 13:00:00');
+
+
+-- Insert test data for like_res
+INSERT INTO like_res (user_id, res_id, date_like)
+VALUES 
+(1, 1, '2023-04-01 09:00:00'),
+(2, 1, '2023-04-02 10:00:00'),
+(1, 2, '2023-04-02 11:00:00'),
+(2, 2, '2023-04-03 12:00:00'),
+(3, 2, '2023-04-03 13:00:00'),
+(1, 3, '2023-04-03 14:00:00'),
+(2, 3, '2023-04-03 15:00:00'),
+(3, 3, '2023-04-04 09:00:00');
+-- Thêm dữ liệu vào bảng like_res
+insert into like_res(user_id, res_id, date_like)
+values (1, 1, now()), (2, 1, now()), (3, 1, now()), (4, 1, now()), (5, 1, now()),
+(1, 2, now()), (2, 2, now()), (3, 2, now()), (4, 2, now()),
+(1, 3, now()), (2, 3, now()), (3, 3, now()),
+(1, 4, now()), (2, 4, now());
+
+-- Thêm dữ liệu vào bảng orders
+insert into orders(user_id, food_id, amount, code, arr_sub_id)
+values (1, 1, 2, 'ORDER123', '1,2'),
+(2, 2, 3, 'ORDER456', '3,4,5'),
+(2, 2, 3, 'ORDER456', '3,4,5,2'),
+(3, 1, 1, 'ORDER789', '2');
+
+-- Thêm dữ liệu vào bảng food_type
+insert into food_type(type_name)
+values ('Món nướng'), ('Món Nhật'), ('Món ăn vặt');
+
+-- Thêm dữ liệu vào bảng foods
+insert into foods(food_name, image, price, description, type_id)
+values ('Thịt nướng', 'https://pasgo.vn/Upload/anh-diem-den/nha-hang-ba-gac---nuong-and-bia-le-quy-don-300-165040363042.jpg', 200000, 'Thịt heo nướng', 1),
+('Sushi', 'https://pasgo.vn/Upload/anh-diem-den/quan-nuong-yaki-che-lan-vien-tan-phu-300-12481811554.jpg', 150000, 'Cơm cuộn Nhật Bản', 2),
+('Bắp rang', 'https://pasgo.vn/Upload/anh-diem-den/quan-lao-tru---street-food-bbq-and-beer-song-hanh-300-124295533105.jpg', 50000, 'Bắp rang muối', 3);
+
+-- Thêm dữ liệu vào bảng sub_food
+insert into sub_food(sub_name, sub_price, food_id)
+values ('Nước mắm', 10000, 1), ('Bia tươi', 20000, 1), ('Sốt cà chua', 5000, 1),
+('Cơm', 10000, 2), ('Sốt wasabi', 3000, 2), ('Sốt tương', 3000, 2), ('Rau thơm', 5000, 2),
+('Đồ chua', 5000, 3), ('Mắm tôm', 10000, 3), ('Tương ớt', 5000, 3), ('Mắm ruốc', 15000, 3);
+-- Tìm 5 người đã like nhà hàng nhiều nhất
+select users.full_name as 'Tên', count(like_res.user_id) as like_count from users
+join  like_res on users.user_id = like_res.user_id
+group by like_res.user_id
+order by like_count DESC
+limit 5;
+-- Tìm 2 nhà hàng có lượt like nhiều nhất
+select restaurants.res_name as 'Tên nhà hàng', count(like_res.res_id) as like_count from restaurants
+join like_res on like_res.res_id = restaurants.res_id
+group by like_res.res_id
+order by like_count DESC
+limit 2;
+-- Tìm người đã dặt hàng nhiều nhất
+select users.user_id as 'ID', users.full_name as 'Người đặt', count(orders.user_id) as order_count from users
+join orders on orders.user_id = users.user_id
+group by users.user_id
+order by order_count desc
+limit 1;
+-- Tìm người dùng không hoạt động trong hệ thống
+select * from users
+left join rate_res on users.user_id = rate_res.user_id
+left join like_res on users.user_id = like_res.user_id
+left join orders on users.user_id = orders.user_id
+where orders.user_id is null && like_res.user_id is null && rate_res.user_id is null;
+-- Tính trung bình subfood của một food
+select avg(subfood_count) from(
+select foods.food_name as 'Ten mon an', count(sub_food.food_id) as subfood_count from foods
+join sub_food on sub_food.food_id = foods.food_id
+group by foods.food_name) as subfood_count;
